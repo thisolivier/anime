@@ -598,6 +598,25 @@
       anim.seek(0);
       anim.play();
     }
+    
+	anim.reset = function(params) {
+	  if (anim.reversed) reverseTweens(anim);
+      anim.pause();
+      anim.seek(0);
+    }
+    
+	anim.reverse = function(params) {
+      anim.pause();
+      if (params) anim = mergeObjects(createAnimation(mergeObjects(params, anim.settings)), anim);
+      time.start = 0;
+      time.last = anim.ended ? 0 : anim.currentTime;
+      var s = anim.settings;
+      if (s.direction !== 'reverse') reverseTweens(anim);
+      if (s.direction === 'alternate' && !s.loop) s.loop = 1;
+      setWillChange(anim);
+      animations.push(anim);
+      if (!raf) engine();
+    }
 
     if (anim.settings.autoplay) anim.play();
 
