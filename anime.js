@@ -598,14 +598,14 @@
       anim.seek(0);
       anim.play();
     }
-    
+
 	anim.reset = function(params) {
 	  if (anim.reversed) reverseTweens(anim);
       anim.pause();
       anim.seek(0);
     }
-    
-	anim.reverse = function(params) {
+
+	anim.revert = function(params) {
       anim.pause();
       if (params) anim = mergeObjects(createAnimation(mergeObjects(params, anim.settings)), anim);
       time.start = 0;
